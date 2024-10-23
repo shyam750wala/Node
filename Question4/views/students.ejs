@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Students</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f8fc;
+        margin: 0;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+        font-size: 32px;
+        margin-bottom: 20px;
+      }
+
+      a,
+      button {
+        text-decoration: none;
+        font-size: 16px;
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      a:hover,
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      .table-container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #007bff;
+        color: white;
+        font-size: 18px;
+      }
+
+      td {
+        font-size: 16px;
+        color: #555;
+      }
+
+      td:last-child {
+        text-align: center;
+      }
+
+      td a,
+      td button {
+        margin-right: 10px;
+      }
+
+      form {
+        display: inline;
+      }
+
+      .actions {
+        display: flex;
+        justify-content: center;
+      }
+
+      .add-new {
+        display: block;
+        width: fit-content;
+        margin: 0 auto 20px;
+        text-align: center;
+        padding: 10px 30px;
+      }
+
+      .logout {
+        display: block;
+        margin: 20px auto;
+        background-color: #dc3545;
+      }
+
+      @media (max-width: 768px) {
+        table,
+        th,
+        td {
+          font-size: 14px;
+        }
+
+        .table-container {
+          padding: 10px;
+        }
+
+        .add-new {
+          font-size: 14px;
+        }
+
+        .logout {
+          font-size: 14px;
+          padding: 8px 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>All Students</h1>
+    <div class="table-container">
+      <a href="/students/new" class="add-new">Add New Student</a>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Course</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% students.forEach(student => { %>
+          <tr>
+            <td><%= student.name %></td>
+            <td><%= student.age %></td>
+            <td><%= student.course %></td>
+            <td class="actions">
+              <a href="/students/edit/<%= student._id %>">Edit</a>
+              <form action="/students/delete/<%= student._id %>" method="POST">
+                <button type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <button style="background: none">
+      <a href="/logout" class="logout">Logout</a>
+    </button>
+  </body>
+</html>

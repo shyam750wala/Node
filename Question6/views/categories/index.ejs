@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Category</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+
+      h1 {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #0056b3;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        padding: 10px;
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      li a {
+        color: #007bff;
+        text-decoration: none;
+        margin-right: 10px;
+      }
+
+      li a:hover {
+        text-decoration: underline;
+      }
+
+      form[action*="delete"] {
+        margin-left: auto;
+      }
+
+      input[type="file"] {
+        margin-top: 10px;
+      }
+
+      .alert {
+        padding: 15px;
+        background-color: #f44336;
+        color: white;
+        margin-top: 20px;
+        border-radius: 4px;
+        display: none;
+      }
+
+      .alert.success {
+        background-color: #4caf50;
+      }
+
+      .alert.show {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Category</h1>
+      <form action="/categories" method="POST">
+        <input type="text" name="name" placeholder="Category name" required />
+        <button type="submit">Add Category</button>
+      </form>
+
+      <ul>
+        <% categories.forEach(category => { %>
+        <li>
+          <%= category.name %>
+          <a href="/categories/edit/<%= category._id %>">Edit</a>
+          <form
+            action="/categories/delete/<%= category._id %>"
+            method="POST"
+            style="display: inline"
+          >
+            <button type="submit">Delete</button>
+          </form>
+        </li>
+        <% }); %>
+        <input type="file" name="image" id="image" />
+      </ul>
+
+      <!-- Optional alert for messages -->
+      <div class="alert" id="alert">This is an alert message</div>
+    </div>
+
+    <script>
+      // Optional: Script to show alert messages (if needed)
+      function showAlert(message, isSuccess = false) {
+        const alertBox = document.getElementById("alert");
+        alertBox.textContent = message;
+        alertBox.className = `alert ${isSuccess ? "success" : ""} show`;
+        setTimeout(() => alertBox.classList.remove("show"), 3000);
+      }
+    </script>
+  </body>
+</html>

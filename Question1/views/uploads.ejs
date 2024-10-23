@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uploads</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      body {
+        background-color: #f9f9f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      h1 {
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 28px;
+      }
+
+      table {
+        width: 90%;
+        max-width: 800px;
+        margin: 0 auto;
+        border-collapse: collapse;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+      }
+
+      thead {
+        background-color: #007bff;
+        color: white;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      th {
+        font-size: 16px;
+        text-transform: uppercase;
+      }
+
+      tbody tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      a {
+        color: #007bff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      a:hover {
+        color: #0056b3;
+      }
+
+      @media (max-width: 768px) {
+        table {
+          width: 100%;
+        }
+
+        th,
+        td {
+          padding: 10px;
+        }
+
+        h1 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>Uploaded Files</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Files</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% users.forEach(user => { %>
+          <tr>
+            <td><%= user.name %></td>
+            <td><%= user.email %></td>
+            <td>
+              <% user.profilePics.forEach(file => { %>
+              <a href="/download/<%= file %>"><%= file %></a><br />
+              <% }) %>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

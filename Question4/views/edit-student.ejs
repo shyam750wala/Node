@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Student</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f8fc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .form-container {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      label {
+        display: block;
+        font-weight: bold;
+        text-align: left;
+        margin-bottom: 5px;
+        color: #555;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+      }
+
+      input:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #28a745;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+
+      button:hover {
+        background-color: #218838;
+        transform: translateY(-2px);
+      }
+
+      button:active {
+        background-color: #1e7e34;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 768px) {
+        .form-container {
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 22px;
+        }
+
+        button {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h1>Edit Student</h1>
+      <form action="/students/edit/<%= student._id %>" method="POST">
+        <label for="name">Name:</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          value="<%= student.name %>"
+          required
+        />
+
+        <label for="age">Age:</label>
+        <input
+          type="number"
+          name="age"
+          id="age"
+          value="<%= student.age %>"
+          required
+        />
+
+        <label for="course">Course:</label>
+        <input
+          type="text"
+          name="course"
+          id="course"
+          value="<%= student.course %>"
+          required
+        />
+
+        <button type="submit">Update Student</button>
+      </form>
+    </div>
+  </body>
+</html>
